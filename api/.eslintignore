@@ -1,0 +1,4 @@
+jest.config.ts
+src/**/interfaces/
+__tests__
+src/typescript/@types
