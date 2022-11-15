@@ -1,0 +1,72 @@
+version: '3.9'
+
+services:
+  ng-db:
+    image: postgres:latest
+    container_name: ng-db
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=12345678
+    restart: 'always'
+    user: postgres
+    networks:
+      -  ng-main-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    cap_add:
+      - SYS_NICE
+
+  ng-backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3001:3001
+    networks:
+      -  ng-main-net
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      ng-db:
+        condition: service_healthy
+    command: bash -c "npx prisma migrate reset --force --schema src/database/prisma/schema.prisma && npm run dev:docker"
+    environment:
+      - NODE_ENV=dev
+      - DATABASE_URL=postgresql://postgres:12345678@ng-db:5432/ng-bank?schema=public
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+
+  ng-frontend:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    networks:
+      -  ng-main-net
+    volumes:
+      - ./web/src:/usr/src/app/src
+      - ./web/public:/usr/src/app/public
+    depends_on:
+      ng-backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+
+networks:
+  ng-main-net:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local
