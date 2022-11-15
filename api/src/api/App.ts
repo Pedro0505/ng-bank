@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import 'express-async-errors';
+import Factory from '../entities/Factory';
 
 class App {
   public app: express.Express;
@@ -16,6 +17,7 @@ class App {
   }
 
   private routes() {
+    this.app.use('/user', Factory.userRouter);
   }
 
   public start(PORT: string | number): void {
