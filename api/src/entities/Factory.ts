@@ -2,8 +2,10 @@ import { Router } from 'express';
 import Joi from 'joi';
 import OrmInjection from '../class/OrmInjection';
 import AccountsController from './accounts/AccountsController';
+import AccountsMiddleware from './accounts/AccountsMiddleware';
 import AccountsRepository from './accounts/AccountsRepository';
 import AccountsRoutes from './accounts/AccountsRoutes.';
+import AccountsSchema from './accounts/AccountsSchema';
 import AccountsService from './accounts/AccountsService';
 import TransactionsController from './transactions/TransactionsController';
 import TransactionsRepository from './transactions/TransactionsRepository';
@@ -34,7 +36,9 @@ class Factory {
     const userRepository = new UsersRepository(new OrmInjection());
     const service = new AccountsService(repository, userRepository, transactionRepository);
     const controller = new AccountsController(service);
-    const router = new AccountsRoutes(Router(), controller);
+    const schemas = new AccountsSchema(Joi);
+    const middleware = new AccountsMiddleware(schemas);
+    const router = new AccountsRoutes(Router(), controller, middleware);
 
     return router.routes;
   }

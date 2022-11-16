@@ -25,7 +25,7 @@ class AccountsController implements IAccountsController {
 
   public cashOut = async (req: Request, res: Response) => {
     const { accountId } = req.tokenData;
-    const { creditedUsername, value }: { creditedUsername: string, value: string } = req.body;
+    const { creditedUsername, value }: { creditedUsername: string, value: number } = req.body;
 
     const service = await this._service.cashOut(accountId, creditedUsername, +value);
 
