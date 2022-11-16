@@ -33,7 +33,7 @@ class UsersController implements IUserController {
       return res.status(code).json({ error });
     }
 
-    return res.status(200).json({ token: service });
+    return res.status(201).json({ token: service });
   };
 }
 
