@@ -31,7 +31,7 @@ class UsersService implements IUsersService {
   public async register(username: string, password: string) {
     const user = await this._repository.getUserByUsername(username);
 
-    if (user) return new ConflictError('Email already registered');
+    if (user) return new ConflictError('Username already registered');
 
     const hash = await new Encrypt().bcryptEncrypt(password);
 
