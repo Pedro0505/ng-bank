@@ -1,6 +1,6 @@
-import ResponseError from './class/BadRequest';
+import HttpErrors from './class/HttpErrors';
 
-export class UnauthorizedError extends ResponseError {
+export class UnauthorizedError extends HttpErrors {
   protected _code: number;
   protected _message: { error: string; };
 

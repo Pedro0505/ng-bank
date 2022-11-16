@@ -1,6 +1,6 @@
-import ResponseError from './class/BadRequest';
+import HttpErrors from './class/HttpErrors';
 
-export class ConflictError extends ResponseError {
+export class ConflictError extends HttpErrors {
   protected _code: number;
   protected _message: { error: string; };
 
