@@ -1,8 +1,11 @@
 import { Router } from 'express';
+import Joi from 'joi';
 import OrmInjection from '../class/OrmInjection';
+import UsersMiddleware from './users/UserMiddleware';
 import UsersController from './users/UsersController';
 import UsersRepository from './users/UsersRepository';
 import UsersRouter from './users/UsersRoutes';
+import UsersSchema from './users/UsersSchemas';
 import UsersService from './users/UsersService';
 
 class Factory {
@@ -10,7 +13,9 @@ class Factory {
     const repository = new UsersRepository(new OrmInjection());
     const service = new UsersService(repository);
     const controller = new UsersController(service);
-    const router = new UsersRouter(Router(), controller);
+    const schemas = new UsersSchema(Joi);
+    const middleware = new UsersMiddleware(schemas);
+    const router = new UsersRouter(Router(), controller, middleware);
 
     return router.routes;
   }
