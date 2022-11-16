@@ -7,7 +7,7 @@ const users = [
   },
   {
     id: 'a26d8353-f3f6-428f-95c1-657cd342b24b',
-    username: 'pedro_herirque',
+    username: 'pedro_henrique',
     password: '$2a$12$1twOHD6s/eVp2mGf8.I7BORqMZ0gNaYIj47g/T9b5gMmbb.Paxx.K', // 12345678B
     accountId: 'fd06d274-75ba-475e-91db-813876fe58fa',
   },
