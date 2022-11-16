@@ -2,7 +2,7 @@ import { Router } from 'express';
 import IUserController from './interfaces/IUsersController';
 import UsersMiddleware from './UserMiddleware';
 
-class UsersRouter {
+class UsersRoutes {
   private _controller: IUserController;
   private _route: Router;
   private _middleware: UsersMiddleware;
@@ -22,4 +22,4 @@ class UsersRouter {
   }
 }
 
-export default UsersRouter;
+export default UsersRoutes;
