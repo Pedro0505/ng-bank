@@ -21,7 +21,7 @@ class UsersService implements IUsersService {
 
     if (!verify) return new UnauthorizedError('Username or password incorrect');
 
-    const token = new Jwt().generate({
+    const token = Jwt.generate({
       username: user.username, userId: user.id, accountId: user.accountId,
     });
 
@@ -37,7 +37,7 @@ class UsersService implements IUsersService {
 
     const created = await this._repository.createUser({ password: hash, username });
 
-    const token = new Jwt().generate({
+    const token = Jwt.generate({
       username: created.username, userId: created.id, accountId: created.accountId,
     });
 
