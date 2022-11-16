@@ -10,10 +10,14 @@ class UsersRepository implements IUsersRepository {
   }
 
   public async createUser({ password, username }: IUsers) {
-    const account = await this._prisma.accounts.create({ data: { balance: 100.00 } });
-
     const created = await this._prisma.users.create({
-      data: { password, username, accountId: account.id },
+      data: { password,
+        username,
+        account: {
+          create: {
+            balance: 100.00,
+          },
+        } },
     });
 
     return created;
