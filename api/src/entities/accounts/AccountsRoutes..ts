@@ -11,6 +11,8 @@ class AccountsRoutes {
     this._route = router;
 
     this._route.get('/', auth, this._controller.getBalanceByUserId);
+
+    this._route.put('/cashOut', auth, this._controller.cashOut);
   }
 
   public get routes() {

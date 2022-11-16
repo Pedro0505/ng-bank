@@ -40,6 +40,40 @@ class TransactionsRepository implements ITransactionsRepository {
 
     return transactions;
   }
+
+  public async createTransiction(debitedAcctId: string, creditedAccId: string, value: number) {
+    const transactionsCreated = await this._prisma.transactions.create({
+      data: {
+        creditedAccountId: creditedAccId,
+        debitedAccountId: debitedAcctId,
+        value,
+      },
+      include: {
+        creditedAccount: {
+          select: {
+            Users: {
+              select: {
+                username: true,
+                id: true,
+              },
+            },
+          },
+        },
+        debitedAccount: {
+          select: {
+            Users: {
+              select: {
+                username: true,
+                id: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return transactionsCreated;
+  }
 }
 
 export default TransactionsRepository;

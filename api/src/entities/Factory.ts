@@ -30,7 +30,9 @@ class Factory {
 
   public static get accountsRouter() {
     const repository = new AccountsRepository(new OrmInjection());
-    const service = new AccountsService(repository);
+    const transactionRepository = new TransactionsRepository(new OrmInjection());
+    const userRepository = new UsersRepository(new OrmInjection());
+    const service = new AccountsService(repository, userRepository, transactionRepository);
     const controller = new AccountsController(service);
     const router = new AccountsRoutes(Router(), controller);
 
