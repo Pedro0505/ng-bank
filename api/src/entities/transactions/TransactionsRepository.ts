@@ -1,8 +1,15 @@
 import OrmInjection from '../../class/OrmInjection';
+import { ITransactionsFilterRepo } from './interfaces/ITransactionsFilter';
 import ITransactionsRepository from './interfaces/ITransactionsRepository';
 
 class TransactionsRepository implements ITransactionsRepository {
   private _prisma: OrmInjection;
+  private includeUser = {
+    include: {
+      creditedAccount: { select: { Users: { select: { username: true, id: true } } } },
+      debitedAccount: { select: { Users: { select: { username: true, id: true } } } },
+    },
+  };
 
   constructor(orm: OrmInjection) {
     this._prisma = orm;
@@ -10,32 +17,10 @@ class TransactionsRepository implements ITransactionsRepository {
 
   public async getAllTransactionByAccountId(accountId: string) {
     const transactions = await this._prisma.transactions.findMany({
-      where: { OR: [
-        { creditedAccountId: accountId },
-        { debitedAccountId: accountId },
-      ] },
-      include: {
-        creditedAccount: {
-          select: {
-            Users: {
-              select: {
-                username: true,
-                id: true,
-              },
-            },
-          },
-        },
-        debitedAccount: {
-          select: {
-            Users: {
-              select: {
-                username: true,
-                id: true,
-              },
-            },
-          },
-        },
+      where: {
+        OR: [{ creditedAccountId: accountId }, { debitedAccountId: accountId }],
       },
+      ...this.includeUser,
     });
 
     return transactions;
@@ -43,36 +28,21 @@ class TransactionsRepository implements ITransactionsRepository {
 
   public async createTransiction(debitedAcctId: string, creditedAccId: string, value: number) {
     const transactionsCreated = await this._prisma.transactions.create({
-      data: {
-        creditedAccountId: creditedAccId,
-        debitedAccountId: debitedAcctId,
-        value,
-      },
-      include: {
-        creditedAccount: {
-          select: {
-            Users: {
-              select: {
-                username: true,
-                id: true,
-              },
-            },
-          },
-        },
-        debitedAccount: {
-          select: {
-            Users: {
-              select: {
-                username: true,
-                id: true,
-              },
-            },
-          },
-        },
-      },
+      data: { creditedAccountId: creditedAccId, debitedAccountId: debitedAcctId, value },
+      ...this.includeUser,
     });
 
     return transactionsCreated;
+  }
+
+  public async filterTransactions({ date, debited, credited }: ITransactionsFilterRepo) {
+    return this._prisma.transactions.findMany({
+      where: {
+        OR: [{ creditedAccountId: credited }, { debitedAccountId: debited }],
+        createdAt: date === undefined ? undefined : { lte: new Date(`${date}T23:59:59.999Z`), gte: new Date(date) },
+      },
+      ...this.includeUser,
+    });
   }
 }
 

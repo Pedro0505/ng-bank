@@ -11,6 +11,7 @@ class TransactionsRoutes {
     this._route = router;
 
     this._route.get('/', auth, this._controller.getAllTransactionByAccountId);
+    this._route.get('/filter', auth, this._controller.filterTransactions);
   }
 
   public get routes() {

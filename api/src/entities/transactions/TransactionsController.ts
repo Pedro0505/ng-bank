@@ -15,6 +15,15 @@ class TransactionsController implements ITransactionsController {
 
     return res.status(200).json({ data: service });
   };
+
+  public filterTransactions = async (req: Request, res: Response) => {
+    const { accountId } = req.tokenData;
+    const { date, type } = req.query as { date: string, type: string };
+
+    const service = await this._service.filterTransactions({ accountId, type, date });
+
+    return res.status(200).json({ data: service });
+  };
 }
 
 export default TransactionsController;
