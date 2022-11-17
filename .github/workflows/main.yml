@@ -1,7 +1,24 @@
 on: [pull_request]
 
 jobs:
-  tests:
+  eslint-api:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Verifica o repositório do Git
+        uses: actions/checkout@v2
+
+      - name: Instala o node com a versão 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Instalando as dependências
+        run: cd api && npm install
+
+      - name: Executando o lint para verificar se há erros
+        run: cd api && npx eslint . --ext .ts
+
+  tests-api:
     runs-on: ubuntu-20.04
     steps:
       - name: Verifica o repositório do Git
