@@ -89,6 +89,16 @@ describe('Testing the route /accounts', () => {
       expect(account.data.balance).toBe(100);
     });
 
+
+    it('Testing if auth is applicated in route', async () => {
+      const { body, status } = await request(app).get(PathRoutes.accountsGetBalanceById);
+
+      expect(status).toBe(401);
+      expect(body.error).toBeDefined();
+      expect(body.error.message).toBeDefined();
+      expect(body).toStrictEqual({ error: { message: 'Token not found' } });
+    });
+
     describe('Testing errors in route', () => {
       it('Testing when is send a user in "creditedUsername" that not exist', async () => {
         const { body, status } = await request(app)

@@ -32,7 +32,7 @@ const transactions = [
     debitedAccountId: '3eaa0cc0-05bb-4ce0-a1b4-4ab6cb4a52cb',
     creditedAccountId: 'd4258e37-e297-45f1-9bcd-487a65f93bfb',
     value: 20.00,
-    createdAt: new Date('2022-11-23')
+    createdAt: new Date('2022-11-17'),
   },
 ];
 
