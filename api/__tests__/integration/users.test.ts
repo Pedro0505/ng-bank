@@ -42,7 +42,7 @@ describe('Testing the /user', () => {
         expect(status).toBe(401);
         expect(body.error).toBeDefined();
         expect(body.error.message).toBeDefined();
-        expect(body.error.message).toBe('Username or password incorrect');
+        expect(body).toStrictEqual({ error: { message: 'Username or password incorrect' } });
       });
 
       it('Testing when the username is correct but the password is incorrect', async () => {
@@ -51,7 +51,7 @@ describe('Testing the /user', () => {
         expect(status).toBe(401);
         expect(body.error).toBeDefined();
         expect(body.error.message).toBeDefined();
-        expect(body.error.message).toBe('Username or password incorrect');
+        expect(body).toStrictEqual({ error: { message: 'Username or password incorrect' } });
       });
 
       describe('Testing the filed "username" errors', () => {
@@ -61,7 +61,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Username\" is required');
+          expect(body).toStrictEqual({ error: { message: '\"Username\" is required' } });
         });
 
         it('When the "username" is send with less than 3 of length', async () => {
@@ -70,7 +70,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Username\" it has to be greater than 2');
+          expect(body).toStrictEqual({ error: { message: '\"Username\" it has to be greater than 2' } });
         });
       });
 
@@ -81,7 +81,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" is required');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" is required' } });
         });
 
         it('When the "password" is send with less than 8 of length', async () => {
@@ -90,7 +90,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it has to be greater than 7');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it has to be greater than 7' } });
         });
 
         it('When the "password" is send without at least one number', async () => {
@@ -99,7 +99,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it\'s must have at least one capital letter and one number');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it\'s must have at least one capital letter and one number' } });
         });
 
         it('When the "password" is send without at least capital letter', async () => {
@@ -108,7 +108,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it\'s must have at least one capital letter and one number');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it\'s must have at least one capital letter and one number' } });
         });
 
         it('When the "password" is send without at least one number and capital letter', async () => {
@@ -117,7 +117,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it\'s must have at least one capital letter and one number');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it\'s must have at least one capital letter and one number' } });
         });
       });
     });
@@ -157,7 +157,7 @@ describe('Testing the /user', () => {
         expect(status).toBe(409);
         expect(body.error).toBeDefined();
         expect(body.error.message).toBeDefined();
-        expect(body.error.message).toBe('Username already registered');
+        expect(body).toStrictEqual({ error: { message: 'Username already registered' } });
       });
 
       describe('Testing the filed "username" errors', () => {
@@ -167,7 +167,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Username\" is required');
+          expect(body).toStrictEqual({ error: { message: '\"Username\" is required' } });
         });
 
         it('When the "username" is send with less than 3 of length', async () => {
@@ -176,7 +176,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Username\" it has to be greater than 2');
+          expect(body).toStrictEqual({ error: { message: '\"Username\" it has to be greater than 2' } });
         });
       });
 
@@ -187,7 +187,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" is required');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" is required' } });
         });
 
         it('When the "password" is send with less than 8 of length', async () => {
@@ -196,7 +196,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it has to be greater than 7');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it has to be greater than 7' } });
         });
 
         it('When the "password" is send without at least one number', async () => {
@@ -205,7 +205,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it\'s must have at least one capital letter and one number');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it\'s must have at least one capital letter and one number' } });
         });
 
         it('When the "password" is send without at least capital letter', async () => {
@@ -214,7 +214,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it\'s must have at least one capital letter and one number');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it\'s must have at least one capital letter and one number' } });
         });
 
         it('When the "password" is send without at least one number and capital letter', async () => {
@@ -223,7 +223,7 @@ describe('Testing the /user', () => {
           expect(status).toBe(400);
           expect(body.error).toBeDefined();
           expect(body.error.message).toBeDefined();
-          expect(body.error.message).toBe('\"Password\" it\'s must have at least one capital letter and one number');
+          expect(body).toStrictEqual({ error: { message: '\"Password\" it\'s must have at least one capital letter and one number' } });
         });
       });
     });
