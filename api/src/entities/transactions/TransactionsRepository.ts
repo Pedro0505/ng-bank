@@ -1,9 +1,9 @@
-import OrmInjection from '../../class/OrmInjection';
+import { PrismaClient } from '@prisma/client';
 import { ITransactionsFilterRepo } from './interfaces/ITransactionsFilter';
 import ITransactionsRepository from './interfaces/ITransactionsRepository';
 
 class TransactionsRepository implements ITransactionsRepository {
-  private _prisma: OrmInjection;
+  private _prisma: PrismaClient;
   private includeUser = {
     include: {
       creditedAccount: { select: { Users: { select: { username: true, id: true } } } },
@@ -11,7 +11,7 @@ class TransactionsRepository implements ITransactionsRepository {
     },
   };
 
-  constructor(orm: OrmInjection) {
+  constructor(orm: PrismaClient) {
     this._prisma = orm;
   }
 

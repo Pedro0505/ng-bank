@@ -1,10 +1,10 @@
-import OrmInjection from '../../class/OrmInjection';
+import { PrismaClient } from '@prisma/client';
 import IAccountsRepository from './interfaces/IAccountsRepository';
 
 class AccountsRepository implements IAccountsRepository {
-  private _prisma: OrmInjection;
+  private _prisma: PrismaClient;
 
-  constructor(orm: OrmInjection) {
+  constructor(orm: PrismaClient) {
     this._prisma = orm;
   }
 
