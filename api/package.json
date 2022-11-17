@@ -7,7 +7,7 @@
     "dev": "tsnd --exit-child ./src/api/server.ts",
     "prestart": "tsc",
     "dev:docker": "tsnd --exit-child --poll ./src/api/server.ts",
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/api/server.js",
     "pretest:integration": "npx prisma migrate reset --force --skip-seed --schema src/database/prisma/schema.test.prisma",
     "test:integration": "NODE_ENV=test jest --runInBand ./__tests__/integration"
   },
