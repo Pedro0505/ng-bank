@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd --exit-child ./src/api/server.ts",
+    "dev": "NODE_ENV=dev tsnd --exit-child ./src/api/server.ts",
     "prestart": "tsc",
     "dev:docker": "tsnd --exit-child --poll ./src/api/server.ts",
     "start": "node ./dist/api/server.js",
