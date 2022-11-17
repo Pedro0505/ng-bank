@@ -8,8 +8,10 @@ import AccountsRoutes from './accounts/AccountsRoutes.';
 import AccountsSchema from './accounts/AccountsSchema';
 import AccountsService from './accounts/AccountsService';
 import TransactionsController from './transactions/TransactionsController';
+import TransactionsMiddleware from './transactions/TransactionsMiddleware';
 import TransactionsRepository from './transactions/TransactionsRepository';
 import TransactionsRoutes from './transactions/TransactionsRoutes';
+import TransactionsSchemas from './transactions/TransactionsSchemas';
 import TransactionsService from './transactions/TransactionsService';
 import UsersMiddleware from './users/UserMiddleware';
 import UsersController from './users/UsersController';
@@ -47,7 +49,9 @@ class Factory {
     const repository = new TransactionsRepository(new OrmInjection());
     const service = new TransactionsService(repository);
     const controller = new TransactionsController(service);
-    const router = new TransactionsRoutes(Router(), controller);
+    const schemas = new TransactionsSchemas(Joi);
+    const middleware = new TransactionsMiddleware(schemas);
+    const router = new TransactionsRoutes(Router(), controller, middleware);
 
     return router.routes;
   }
