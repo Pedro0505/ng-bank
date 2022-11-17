@@ -8,7 +8,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
   if (!authorization) {
     const { reponse: { code, error } } = new UnauthorizedError('Token not found');
 
-    return res.status(code).json(error);
+    return res.status(code).json({ error: { message: error.message } });
   }
 
   try {
@@ -18,7 +18,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     const { reponse } = new UnauthorizedError('Expired or invalid token');
 
-    return res.status(reponse.code).json(reponse.error);
+    return res.status(reponse.code).json({ error: { message: reponse.error.message } });
   }
 };
 
