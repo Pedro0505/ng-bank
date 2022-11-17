@@ -14,6 +14,10 @@ class TransactionsMiddleware extends ValidatorMiddleware {
     const { date, type } = req.query as { date: string, type: string };
     const { error } = this._schema.filters().validate({ date, type });
 
+    if (!date && !type) {
+      return res.status(400).json({ error: { message: 'Need a last one query filter "date" or "type"' } });
+    }
+
     if (error) {
       const { code, message } = super.handleError(error.message.split('|'));
       return res.status(code).json({ error: { message } });

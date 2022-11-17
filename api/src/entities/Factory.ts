@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import Joi from 'joi';
-import OrmInjection from '../class/OrmInjection';
+import prisma from '../database/prisma';
 import AccountsController from './accounts/AccountsController';
 import AccountsMiddleware from './accounts/AccountsMiddleware';
 import AccountsRepository from './accounts/AccountsRepository';
-import AccountsRoutes from './accounts/AccountsRoutes.';
+import AccountsRoutes from './accounts/AccountsRoutes';
 import AccountsSchema from './accounts/AccountsSchema';
 import AccountsService from './accounts/AccountsService';
 import TransactionsController from './transactions/TransactionsController';
@@ -22,7 +22,7 @@ import UsersService from './users/UsersService';
 
 class Factory {
   public static get userRouter() {
-    const repository = new UsersRepository(new OrmInjection());
+    const repository = new UsersRepository(prisma);
     const service = new UsersService(repository);
     const controller = new UsersController(service);
     const schemas = new UsersSchema(Joi);
@@ -33,9 +33,9 @@ class Factory {
   }
 
   public static get accountsRouter() {
-    const repository = new AccountsRepository(new OrmInjection());
-    const transactionRepository = new TransactionsRepository(new OrmInjection());
-    const userRepository = new UsersRepository(new OrmInjection());
+    const repository = new AccountsRepository(prisma);
+    const transactionRepository = new TransactionsRepository(prisma);
+    const userRepository = new UsersRepository(prisma);
     const service = new AccountsService(repository, userRepository, transactionRepository);
     const controller = new AccountsController(service);
     const schemas = new AccountsSchema(Joi);
@@ -46,7 +46,7 @@ class Factory {
   }
 
   public static get transactionsRouter() {
-    const repository = new TransactionsRepository(new OrmInjection());
+    const repository = new TransactionsRepository(prisma);
     const service = new TransactionsService(repository);
     const controller = new TransactionsController(service);
     const schemas = new TransactionsSchemas(Joi);
