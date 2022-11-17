@@ -1,6 +1,6 @@
-import ResponseError from './class/BadRequest';
+import HttpErrors from './class/HttpErrors';
 
-class NotFoundError extends ResponseError {
+class NotFoundError extends HttpErrors {
   protected _code: number;
   protected _message: { error: string; };
 

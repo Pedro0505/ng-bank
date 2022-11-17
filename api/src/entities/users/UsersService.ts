@@ -21,7 +21,7 @@ class UsersService implements IUsersService {
 
     if (!verify) return new UnauthorizedError('Username or password incorrect');
 
-    const token = new Jwt().generate({
+    const token = Jwt.generate({
       username: user.username, userId: user.id, accountId: user.accountId,
     });
 
@@ -31,13 +31,13 @@ class UsersService implements IUsersService {
   public async register(username: string, password: string) {
     const user = await this._repository.getUserByUsername(username);
 
-    if (user) return new ConflictError('Email already registered');
+    if (user) return new ConflictError('Username already registered');
 
     const hash = await new Encrypt().bcryptEncrypt(password);
 
     const created = await this._repository.createUser({ password: hash, username });
 
-    const token = new Jwt().generate({
+    const token = Jwt.generate({
       username: created.username, userId: created.id, accountId: created.accountId,
     });
 

@@ -18,6 +18,8 @@ class App {
 
   private routes() {
     this.app.use('/user', Factory.userRouter);
+    this.app.use('/accounts', Factory.accountsRouter);
+    this.app.use('/transactions', Factory.transactionsRouter);
   }
 
   public start(PORT: string | number): void {

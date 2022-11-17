@@ -1,6 +1,6 @@
 import IResponseError from '../interfaces/IResponseError';
 
-abstract class BadRequest {
+abstract class HttpErrors {
   protected _code: number;
   protected _message: { error: string };
 
@@ -13,4 +13,4 @@ abstract class BadRequest {
   abstract get reponse(): IResponseError;
 }
 
-export default BadRequest;
+export default HttpErrors;

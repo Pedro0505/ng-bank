@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import BadRequest from '../../utils/http_responses/class/BadRequest';
+import HttpErrors from '../../utils/http_responses/class/HttpErrors';
 import IUserController from './interfaces/IUsersController';
 import IUserService from './interfaces/IUsersService';
 
@@ -15,7 +15,7 @@ class UsersController implements IUserController {
 
     const service = await this._service.login(username, password);
 
-    if (service instanceof BadRequest) {
+    if (service instanceof HttpErrors) {
       const { reponse: { code, error } } = service;
       return res.status(code).json({ error });
     }
@@ -28,12 +28,12 @@ class UsersController implements IUserController {
 
     const service = await this._service.register(username, password);
 
-    if (service instanceof BadRequest) {
+    if (service instanceof HttpErrors) {
       const { reponse: { code, error } } = service;
       return res.status(code).json({ error });
     }
 
-    return res.status(200).json({ token: service });
+    return res.status(201).json({ token: service });
   };
 }
 
