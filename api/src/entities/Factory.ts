@@ -4,7 +4,7 @@ import prisma from '../database/prisma';
 import AccountsController from './accounts/AccountsController';
 import AccountsMiddleware from './accounts/AccountsMiddleware';
 import AccountsRepository from './accounts/AccountsRepository';
-import AccountsRoutes from './accounts/AccountsRoutes.';
+import AccountsRoutes from './accounts/AccountsRoutes';
 import AccountsSchema from './accounts/AccountsSchema';
 import AccountsService from './accounts/AccountsService';
 import TransactionsController from './transactions/TransactionsController';
