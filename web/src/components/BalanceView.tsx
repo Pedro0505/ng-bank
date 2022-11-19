@@ -5,7 +5,15 @@ function BalanceView() {
   const { fetchUserBalance, userBalance } = useContext(UserContext);
 
   useEffect(() => {
-    fetchUserBalance();
+    const fetchBalance = async () => {
+      try {
+        fetchUserBalance();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchBalance();
   }, []);
 
   return (
