@@ -1,16 +1,12 @@
 import { Button } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import deleteUserToken from '../../helpers/deleteUserToken';
 
 function Header() {
-  const { fetchUser, userToken } = useContext(UserContext);
+  const { userToken } = useContext(UserContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
 
   const handleLogOut = () => {
     deleteUserToken();
