@@ -1,9 +1,16 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
+import Home from './pages/Home/Home';
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Routes>
+        <Route path="/" element={ <SignUp /> } />
+        <Route path="/home" element={ <UserProvider> <Home /> </UserProvider> } />
+      </Routes>
     </div>
   );
 }
