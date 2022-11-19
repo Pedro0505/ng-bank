@@ -1,0 +1,15 @@
+export default {
+  'The transfer value cannot be zero': 'O valor para transferencia não pode ser zero',
+  'You cannot transfer to your own account': 'Você não pode transferir para sua própria conta',
+  '"value" must have one or two decimal places': 'O valor a ser transferido tem que ter uma ou duas casas decimais',
+  '"creditedUsername" is required': 'O nome do do(a) úsuario(a) tem que ser preenchido',
+  '"creditedUsername" it has to be greater than 2': 'O nome do do(a) úsuario(a) tem que ter mais de 2 caracteres',
+  '"value" is required': 'O valor a ser transferido tem que ser preenchido',
+  '"value" must be a number': 'O valor tem que ser númerico',
+  '"creditedUsername" is not allowed to be empty': 'O nome do do(a) úsuario(a) tem que ser preenchido',
+  '"value" is not allowed to be empty': 'O valor a ser transferido tem que ser preenchido',
+  'User not found': 'Úsuario(a) não encontrado',
+  'Balance is not enough': 'Seu saldo não é o suficiente',
+  'Account not found': 'Conta não encontrada',
+  'Oops, something went wrong with your transaction, please try again!': 'Opps ocorreu um erro tente novamente mais tarde',
+};

@@ -4,9 +4,11 @@ import CashOutForm from '../../components/CashOutForm/CashOutForm';
 import Header from '../../components/Header/Header';
 import TransactionsTable from '../../components/TransactionsTable/TransactionsTable';
 import { UserContext } from '../../context/UserContext';
+import useTokenRedirect from '../../hooks/useTokenRedirect';
 
 function Home() {
   const { fetchUserToken } = useContext(UserContext);
+  useTokenRedirect();
 
   useEffect(() => {
     fetchUserToken();
