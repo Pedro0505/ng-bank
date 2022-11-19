@@ -1,11 +1,13 @@
 import React, { createContext, useState } from 'react';
 import getUserBalance from '../api/getUserBalance';
 import getUserTransactions from '../api/getUserTransactions';
+import userCashOut from '../api/userCashOut';
 import verifyUser from '../api/verifyUser';
 import getUserToken from '../helpers/getUserToken';
 import IAccountBalanceResponse from '../interfaces/IAccountBalanceResponse';
+import ICashOutCreate from '../interfaces/ICashOutCreate';
 import IJwtToken from '../interfaces/IJwtToken';
-import ITransactionsMap from '../interfaces/ITransactionsMap';
+import ITrasnsactionsResponse from '../interfaces/ITrasnsactionsResponse';
 import IUserContextProps from './interfaces/IUserContextProps';
 import IUserContextType from './interfaces/IUserContextType';
 
@@ -15,17 +17,20 @@ const initialValue = {
   fetchUserToken: async () => {},
   fetchUserBalance: async () => {},
   fetchUserTransactions: async () => {},
-  transactions: [
-    {
-      id: '',
-      creditedUser: '',
-      debitedUser: '',
-      value: 20,
-      createdAt: '',
-      type: '',
-      transferParticipant: '',
-    },
-  ],
+  createCashOut: async () => {},
+  transactions: {
+    data: [
+      {
+        id: '',
+        debitedAccountId: '',
+        creditedAccountId: '',
+        value: 20,
+        createdAt: '',
+        creditedAccount: { Users: [{ username: '', id: '' }] },
+        debitedAccount: { Users: [{ username: '', id: '' }] },
+      },
+    ],
+  },
 };
 
 export const UserContext = createContext<IUserContextType>(initialValue);
@@ -33,7 +38,9 @@ export const UserContext = createContext<IUserContextType>(initialValue);
 export const UserProvider = ({ children }: IUserContextProps) => {
   const [userToken, setUserToken] = useState<IJwtToken>({ data: { username: '', userId: '', accountId: '' } });
   const [userBalance, setUserBalance] = useState<IAccountBalanceResponse>({ data: { id: '', balance: 0.00 } });
-  const [transactions, setTransactions] = useState<ITransactionsMap[]>(initialValue.transactions);
+  const [transactions, setTransactions] = useState<ITrasnsactionsResponse>(
+    initialValue.transactions,
+  );
 
   const fetchUserToken = async () => {
     const token = getUserToken();
@@ -52,29 +59,24 @@ export const UserProvider = ({ children }: IUserContextProps) => {
   const fetchUserTransactions = async () => {
     const token = getUserToken();
     const getTransactions = await getUserTransactions(token as string);
-    const user = await verifyUser(token as string);
 
-    const transactionsMap = getTransactions.data.map((tr) => {
-      const { username: credited } = tr.creditedAccount.Users[0];
-      const { username: debited } = tr.debitedAccount.Users[0];
-      return {
-        id: tr.id,
-        createdAt: tr.createdAt.split('T')[0],
-        creditedUser: credited,
-        debitedUser: debited,
-        transferParticipant: credited === user.data.username ? debited : credited,
-        value: tr.value,
-        type: tr.creditedAccount.Users[0].username === user.data.username ? 'Creditado' : 'Debitado',
-      };
-    });
+    setTransactions(getTransactions);
+  };
 
-    setTransactions(transactionsMap);
+  const createCashOut = async (data: ICashOutCreate) => {
+    const token = getUserToken();
+    const cashOut = await userCashOut(data, token as string);
+    const newBalance = userBalance.data.balance - data.value;
+
+    setUserBalance((prevState) => ({ data: { id: prevState.data.id, balance: newBalance } }));
+    setTransactions((prevState) => ({ data: [...prevState.data, cashOut.data] }));
   };
 
   const context = {
     fetchUserToken,
     fetchUserBalance,
     fetchUserTransactions,
+    createCashOut,
     userBalance,
     userToken,
     transactions,
