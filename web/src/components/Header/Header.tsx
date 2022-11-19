@@ -5,11 +5,11 @@ import { UserContext } from '../../context/UserContext';
 import deleteUserToken from '../../helpers/deleteUserToken';
 
 function Header() {
-  const { fetchUser, userToken } = useContext(UserContext);
+  const { fetchUserToken, userToken } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchUser();
+    fetchUserToken();
   }, []);
 
   const handleLogOut = () => {
