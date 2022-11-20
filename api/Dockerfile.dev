@@ -10,6 +10,6 @@ EXPOSE 3001
 
 COPY . .
 
-RUN npx prisma generate --schema src/database/prisma/schema.prisma
+RUN apk update && apk add bash
 
-CMD npm run dev:docker
+RUN npx prisma generate --schema src/database/prisma/schema.prisma

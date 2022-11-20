@@ -35,6 +35,7 @@ services:
     depends_on:
       ng-db:
         condition: service_healthy
+    command: bash -c "npx prisma migrate reset --force --schema src/database/prisma/schema.prisma && npm run dev:docker"
     environment:
       - NODE_ENV=dev
       - DATABASE_URL=postgresql://postgres:12345678@ng-db:5432/ng-bank?schema=public
