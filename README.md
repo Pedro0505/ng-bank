@@ -37,31 +37,31 @@ A execução local pode ser dada das seguintes formas: Docker ou Node
   1. Clone o projeto
 
   ```bash
-    git clone git@github.com:Pedro0505/ng-bank.git
+git clone git@github.com:Pedro0505/ng-bank.git
   ```
 
   2. Entre no diretório do projeto
 
   ```bash
-    cd ng-bank
+cd ng-bank
   ```
 
   3. Suba os containers
 
   ```bash
-    docker-compose -f docker-compose.dev.yml up --build -d
+docker-compose -f docker-compose.dev.yml up --build -d
   ```
 
   5. Quando o processo dos containers estiver acabado acesse a aplicação usando o seguinte endereço
 
   ```bash
-    http://localhost:3000
+http://localhost:3000
   ```
 
   6. Para derrubar os containers
 
   ```bash
-    docker-compose -f docker-compose.dev.yml down --rmi all --volumes --remove-orphans
+docker-compose -f docker-compose.dev.yml down --rmi all --volumes --remove-orphans
   ```
 </details>
 
@@ -73,49 +73,49 @@ A execução local pode ser dada das seguintes formas: Docker ou Node
   Clone o projeto
 
   ```bash
-    git clone git@github.com:Pedro0505/ng-bank.git
+git clone git@github.com:Pedro0505/ng-bank.git
   ```
 
   Entre no diretório do projeto na parte da api
 
   ```bash
-    cd ng-bank/api
+cd ng-bank/api
   ```
 
   Instale as dependências
 
   ```bash
-    npm install
+npm install
   ```
 
   Inicie o servidor
 
   ```bash
-    npm run dev
+npm run dev
   ```
   
   Entre no diretório do projeto na parte do front-end
 
   ```bash
-    cd ..
-    cd ng-bank/web
+cd ..
+cd ng-bank/web
   ```
 
   Instale as dependências
 
   ```bash
-    npm install
+npm install
   ```
 
   Inicie o servidor
 
   ```bash
-    npm start
+npm start
   ```
 
   Acesse a aplicação usando o seguinte endereço
 
   ```bash
-    localhost:3000
+localhost:3000
   ```
 </details>
