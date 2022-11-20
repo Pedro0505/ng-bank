@@ -1,4 +1,5 @@
 import React from 'react';
+import './style/app.css';
 import { Route, Routes } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import Home from './pages/Home/Home';

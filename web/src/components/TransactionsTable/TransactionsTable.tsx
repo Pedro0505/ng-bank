@@ -1,6 +1,7 @@
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import React, { useContext, useEffect, useState } from 'react';
 import clsx from 'clsx';
+import './style.css';
 import Box from '@mui/material/Box';
 import { UserContext } from '../../context/UserContext';
 import ITransactionsMap from '../../interfaces/ITransactionsMap';
@@ -17,7 +18,7 @@ function TransactionsTable() {
     {
       field: 'value',
       headerName: 'Valor',
-      width: 330,
+      width: 150,
       cellClassName: (params: GridCellParams<number>) => {
         if (params.value == null) {
           return '';
@@ -77,10 +78,11 @@ function TransactionsTable() {
 
   return (
     <div className="data-table">
+      <h1>Tabela de transações</h1>
       <Box
         sx={{
           height: 300,
-          width: '70%',
+          width: '66%',
           '& .super-app-theme--cell': {
             color: '#1a3e72',
             fontWeight: '600',

@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
+import { BsPersonCircle } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './style.css';
 import { Button, TextField } from '@mui/material';
 import setUserToken from '../../helpers/setUserToken';
 import ICreateUserRegister from '../../interfaces/ICreateUserRegister';
@@ -40,12 +42,17 @@ function Register() {
   };
 
   return (
-    <div>
+    <section className="register-inputs-container">
+      <div className="heading-register">
+        <BsPersonCircle size={ 25 } />
+        <h1>Registrar</h1>
+      </div>
       <TextField
         id="username-register-field"
         label="Nome do Úsuario"
         variant="outlined"
         name="username"
+        style={ { width: '300px', paddingBottom: '50px' } }
         onChange={ handleChange }
       />
       <TextField
@@ -53,6 +60,7 @@ function Register() {
         label="Senha"
         variant="outlined"
         name="password"
+        style={ { width: '300px', paddingBottom: '50px' } }
         type="password"
         onChange={ handleChange }
 
@@ -64,8 +72,8 @@ function Register() {
           </p>
         </div>
       ) }
-      <Button variant="contained" size="large" onClick={ submitRegister }>Fazer Cadastro</Button>
-    </div>
+      <Button style={ { backgroundColor: '#7F5AF0' } } className="register-button" variant="contained" size="large" onClick={ submitRegister }>Fazer Cadastro</Button>
+    </section>
   );
 }
 

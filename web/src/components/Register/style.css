@@ -1,0 +1,27 @@
+.register-inputs-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 700px;
+  background-color: #FFFFFF;
+  z-index: 100;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-button {
+  width: fit-content;
+}
+
+.heading-register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 80px;
+}
+
+.heading-register h1 {
+  padding: 10px 10px;
+}

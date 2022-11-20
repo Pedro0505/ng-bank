@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
+import './style.css';
 import React, {
   ChangeEvent, useContext, useEffect, useState,
 } from 'react';
@@ -50,6 +51,8 @@ function CashOutForm() {
     try {
       if (isValidValue) {
         await createCashOut({ ...chashOutField, value: +chashOutField.value });
+        setCashOutField({ creditedUsername: '', value: 0 });
+        setValue('');
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -59,12 +62,15 @@ function CashOutForm() {
   };
 
   return (
-    <div>
+    <div className="cash-out-fileds">
+      <h1>Transferência</h1>
       <TextField
         id="creditedUser-field"
         label="Nome do Beneficiado(a)"
         variant="outlined"
+        style={ { width: '300px', paddingBottom: '50px' } }
         name="creditedUsername"
+        value={ chashOutField.creditedUsername }
         onChange={ handleChange }
       />
       <TextField
@@ -72,6 +78,7 @@ function CashOutForm() {
         label="Valor a ser transferido"
         variant="outlined"
         name="value"
+        style={ { width: '300px', paddingBottom: '50px' } }
         onChange={ (event) => {
           handleChange(event);
           validateValueInput(event);
@@ -79,12 +86,12 @@ function CashOutForm() {
         value={ value }
         InputProps={{ inputProps: { min: 0 } }}
       />
+      <Button style={ { backgroundColor: '#7F5AF0' } } disabled={ !isValidValue } variant="contained" size="large" onClick={ submitCashOut }>Transferir</Button>
       { errorExist && (
-        <span>
+        <span className="error-message">
           { errorMessage }
         </span>
       ) }
-      <Button disabled={ !isValidValue } variant="contained" size="large" onClick={ submitCashOut }>Transferir</Button>
     </div>
   );
 }
