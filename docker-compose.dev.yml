@@ -57,6 +57,8 @@ services:
     depends_on:
       ng-backend:
         condition: service_healthy
+    environment:
+      - REACT_APP_PUBLIC_API=http://localhost:3001
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3000"]
       timeout: 10s
