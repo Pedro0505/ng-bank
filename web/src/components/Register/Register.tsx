@@ -65,14 +65,12 @@ function Register() {
         onChange={ handleChange }
 
       />
-      { errorExist && (
-        <div>
-          <p>
-            { errorMessage }
-          </p>
-        </div>
-      ) }
       <Button style={ { backgroundColor: '#7F5AF0' } } className="register-button" variant="contained" size="large" onClick={ submitRegister }>Fazer Cadastro</Button>
+      { errorExist && (
+        <span className="error-message">
+          { errorMessage }
+        </span>
+      ) }
     </section>
   );
 }

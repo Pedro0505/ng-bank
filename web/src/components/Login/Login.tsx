@@ -65,14 +65,12 @@ function Login() {
         onChange={ handleChange }
 
       />
-      { errorExist && (
-        <div>
-          <p>
-            { errorMessage }
-          </p>
-        </div>
-      ) }
       <Button style={ { backgroundColor: '#7F5AF0' } } className="login-button" variant="contained" size="large" onClick={ submitLogin }>Entrar</Button>
+      { errorExist && (
+        <span className="error-message">
+          { errorMessage }
+        </span>
+      ) }
     </section>
   );
 }
