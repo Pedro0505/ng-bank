@@ -1,0 +1,11 @@
+.header-home-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: #000000;
+}
+
+.header-home-page h1 {
+  color: white;
+}

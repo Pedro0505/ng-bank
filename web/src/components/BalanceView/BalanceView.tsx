@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { UserContext } from '../context/UserContext';
+import './style.css';
+import { UserContext } from '../../context/UserContext';
 
 function BalanceView() {
   const { fetchUserBalance, userBalance } = useContext(UserContext);
@@ -17,8 +18,9 @@ function BalanceView() {
   }, []);
 
   return (
-    <div>
-      <p>Saldo { userBalance.data.balance.toFixed(2) }</p>
+    <div className="balance-container">
+      <h1>Saldo:</h1>
+      <h1>R$ { userBalance.data.balance.toFixed(2) }</h1>
     </div>
   );
 }

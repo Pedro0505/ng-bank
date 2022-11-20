@@ -1,0 +1,9 @@
+.cash-out-fileds {
+  display: flex;
+  flex-direction: column;
+  padding: 35px 45px 35px 45px;
+}
+
+.cash-out-fileds h1 {
+  padding-bottom: 30px;
+}

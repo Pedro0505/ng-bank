@@ -15,10 +15,12 @@ class AccountsSchema extends ValidatorMiddleware {
         'any.required': '400|"creditedUsername" is required',
         'string.min': '400|"creditedUsername" it has to be greater than 2',
       }),
-      value: this.joi.number().strict().required().messages({
-        'any.required': '400|"value" is required',
-        'number.base': '400|"value" must be a number',
-      }),
+      value: this.joi.number().strict().min(0).required()
+        .messages({
+          'any.required': '400|"value" is required',
+          'number.base': '400|"value" must be a number',
+          'number.min': '400|"value" must be greater than 0',
+        }),
     });
   }
 }

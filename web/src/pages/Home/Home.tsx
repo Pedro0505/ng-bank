@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import BalanceView from '../../components/BalanceView';
+import './style.css';
+import BalanceView from '../../components/BalanceView/BalanceView';
 import CashOutForm from '../../components/CashOutForm/CashOutForm';
 import Header from '../../components/Header/Header';
 import TransactionsTable from '../../components/TransactionsTable/TransactionsTable';
@@ -18,8 +19,10 @@ function Home() {
     <div>
       <Header />
       <BalanceView />
-      <CashOutForm />
-      <TransactionsTable />
+      <section className="cash-out-transaction-container">
+        <CashOutForm />
+        <TransactionsTable />
+      </section>
     </div>
   );
 }

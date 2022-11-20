@@ -1,7 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
+import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, TextField } from '@mui/material';
+import './style.css';
 import ICreateUserLogin from '../../interfaces/ICreateUserLogin';
 import userLogin from '../../api/userLogin';
 import setUserToken from '../../helpers/setUserToken';
@@ -40,12 +42,17 @@ function Login() {
   };
 
   return (
-    <div>
+    <section className="login-inputs-container">
+      <div className="heading-login">
+        <FaSignInAlt size={ 25 } />
+        <h1>Entrar</h1>
+      </div>
       <TextField
         id="username-login-field"
         label="Nome do Úsuario"
         variant="outlined"
         name="username"
+        style={ { width: '300px', paddingBottom: '50px' } }
         onChange={ handleChange }
       />
       <TextField
@@ -54,6 +61,7 @@ function Login() {
         variant="outlined"
         name="password"
         type="password"
+        style={ { width: '300px', paddingBottom: '50px' } }
         onChange={ handleChange }
 
       />
@@ -64,8 +72,8 @@ function Login() {
           </p>
         </div>
       ) }
-      <Button variant="contained" size="large" onClick={ submitLogin }>Entrar</Button>
-    </div>
+      <Button style={ { backgroundColor: '#7F5AF0' } } className="login-button" variant="contained" size="large" onClick={ submitLogin }>Entrar</Button>
+    </section>
   );
 }
 
