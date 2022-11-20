@@ -70,6 +70,8 @@ docker-compose -f docker-compose.dev.yml down --rmi all --volumes --remove-orpha
 
   ***⚠️ Para rodar localmente é necessário ter o PostgreSql instalado localmente ⚠️***
   
+  ***Obs: Para usar localmente deve ser preenchido com as informações necessárias no '.env', conforme está escrito no '.env.example'***
+  
   Clone o projeto
 
   ```bash
