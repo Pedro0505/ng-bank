@@ -1,6 +1,6 @@
-# Ng Bank
+# 󠁧󠁢󠁷󠁬󠁳󠁿🏦 Ng Bank 󠁧󠁢󠁷🏦
 
-Projeto full-stack que simula um bando digital, com login, registro, autenticação JWT, transações entre contas e histórico dessas transações.
+Projeto full-stack que simula um banco digital, com login, registro, autenticação JWT, transações entre contas e histórico dessas transações.
 
 Demonstração do projeto:
 
