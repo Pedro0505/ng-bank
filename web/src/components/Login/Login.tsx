@@ -52,7 +52,7 @@ function Login() {
         label="Nome do Úsuario"
         variant="outlined"
         name="username"
-        style={ { width: '300px', paddingBottom: '50px' } }
+        style={ { paddingBottom: '50px' } }
         onChange={ handleChange }
       />
       <TextField
@@ -61,7 +61,7 @@ function Login() {
         variant="outlined"
         name="password"
         type="password"
-        style={ { width: '300px', paddingBottom: '50px' } }
+        style={ { paddingBottom: '50px' } }
         onChange={ handleChange }
 
       />

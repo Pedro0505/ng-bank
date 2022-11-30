@@ -1,11 +1,9 @@
 .main-login-page {
   background-color: #161616;
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   position: relative;
   justify-content: space-evenly;
 }
@@ -13,4 +11,10 @@
 .sign-up-waves {
   position: absolute;
   bottom: 0;
+}
+
+@media screen and (max-width: 860px) {
+  .main-login-page {
+    flex-direction: column-reverse;
+  }
 }

@@ -26,3 +26,30 @@
   padding: 10px 10px;
 }
 
+#password-login-field {
+  width: 300px;
+}
+
+#username-login-field {
+  width: 300px;
+}
+
+@media screen and (max-width: 860px) {
+  .login-inputs-container {
+    margin: 30px 30px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .login-inputs-container {
+    width: 300px;
+  }
+
+  #password-login-field {
+    width: 240px;
+  }
+
+  #username-login-field {
+    width: 240px;
+  }
+}

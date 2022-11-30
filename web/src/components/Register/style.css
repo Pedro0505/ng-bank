@@ -25,3 +25,31 @@
 .heading-register h1 {
   padding: 10px 10px;
 }
+
+#password-register-field {
+  width: 300px;
+}
+
+#username-register-field {
+  width: 300px;
+}
+
+@media screen and (max-width: 860px) {
+  .register-inputs-container {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .register-inputs-container {
+    width: 300px;
+  }
+
+  #password-register-field {
+    width: 240px;
+  }
+
+  #username-register-field {
+    width: 240px;
+  }
+}
