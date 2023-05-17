@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  ng-db-prod:
+    image: postgres:latest
+    container_name: ng-db-prod
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=12345678
+    restart: 'always'
+    user: postgres
+    networks:
+      -  ng-main-net-prod
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      timeout: 10s
+      retries: 5
+    cap_add:
+      - SYS_NICE
+
+  ng-backend-prod:
+    container_name: ng-backend-prod
+    build:
+      context: ./api
+      dockerfile: Dockerfile.prod
+    ports:
+      - 3001:3001
+    networks:
+      -  ng-main-net-prod
+    depends_on:
+      ng-db-prod:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=dev
+      - DATABASE_URL=postgresql://postgres:12345678@ng-db-prod:5432/ng-bank?schema=public
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+
+  ng-frontend-prod:
+    container_name: ng-frontend-prod
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    networks:
+      -  ng-main-net-prod
+    volumes:
+      - ./web/src:/usr/src/app/src
+      - ./web/public:/usr/src/app/public
+    depends_on:
+      ng-backend-prod:
+        condition: service_healthy
+    environment:
+      - REACT_APP_PUBLIC_API=http://localhost:3001
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+
+networks:
+  ng-main-net-prod:
+    driver: bridge
