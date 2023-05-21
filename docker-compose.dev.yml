@@ -63,10 +63,6 @@ services:
         condition: service_healthy
     environment:
       - REACT_APP_PUBLIC_API=http://localhost:3001
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
-      timeout: 10s
-      retries: 5
 
 networks:
   ng-main-net:

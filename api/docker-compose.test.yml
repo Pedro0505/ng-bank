@@ -28,7 +28,3 @@ services:
       - NODE_ENV=test
       - DATABASE_URL_TEST=postgresql://postgres:12345678@ng-bank-db-test:5432/ng-bank-test-docker?schema=public
       - JWT_SECRET=dsadsadas92je93ms02ms02new
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
