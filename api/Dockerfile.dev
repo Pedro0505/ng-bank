@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16
 
 WORKDIR /usr/src/app
 
@@ -10,6 +10,8 @@ EXPOSE 3001
 
 COPY . .
 
-RUN apk update && apk add bash
+RUN apt-get update && apt-get install bash
+
+RUN apt-get update && apt-get install -y curl
 
 RUN npx prisma generate --schema src/database/prisma/schema.prisma

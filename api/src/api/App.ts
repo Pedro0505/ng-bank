@@ -20,6 +20,7 @@ class App {
     this.app.use('/user', Factory.userRouter);
     this.app.use('/accounts', Factory.accountsRouter);
     this.app.use('/transactions', Factory.transactionsRouter);
+    this.app.get('/healthy', (req, res) => res.json({ status: 'healthy' }));
   }
 
   public start(PORT: string | number): void {

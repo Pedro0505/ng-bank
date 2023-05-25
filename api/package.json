@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=dev tsnd --exit-child ./src/api/server.ts",
-    "prestart": "tsc",
-    "dev:docker": "tsnd --exit-child --poll ./src/api/server.ts",
+    "build": "tsc",
     "start": "node ./dist/api/server.js",
+    "prestart": "tsc",
+    "dev": "NODE_ENV=dev tsnd --exit-child ./src/api/server.ts",
+    "dev:docker": "tsnd --exit-child --poll ./src/api/server.ts",
     "pretest:integration": "npx prisma migrate reset --force --skip-seed --schema src/database/prisma/schema.test.prisma",
     "test:integration": "NODE_ENV=test jest --runInBand ./__tests__/integration"
   },

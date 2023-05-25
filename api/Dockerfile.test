@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16
 
 WORKDIR /usr/src/app
 
@@ -7,6 +7,10 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+RUN apt-get update && apt-get install bash
+
+RUN apt-get update && apt-get install -y curl
 
 RUN npx prisma generate --schema src/database/prisma/schema.test.prisma
 
